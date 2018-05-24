@@ -1,4 +1,6 @@
-from tkinter import *
+import tkinter as tk
+#from sys import exit
+
 
 class Item:
     """Enter store items and details"""
@@ -15,46 +17,79 @@ class Item:
         self.initials = initials
         self.more_info = more_info
 
-def enter_key(param):
-    print(param)
 
-def textbox():
-    master = Tk()
-    Label(master, text="Date").grid(row=0)
-    Label(master, text="Item").grid(row=1)
-    Label(master, text="Item Number").grid(row=2)
-    Label(master, text="Where").grid(row=3)
-    Label(master, text="Details").grid(row=4)
-    Label(master, text="Price").grid(row=5)
-    Label(master, text="Seller").grid(row=6)
-    Label(master, text="Buyer").grid(row=7)
-    Label(master, text="Initials").grid(row=8)
-    Label(master, text="More Info").grid(row=9)
+class EnterData:
 
-    e1 = Entry(master)
-    e2 = Entry(master)
-    e3 = Entry(master)
-    e4 = Entry(master)
-    e5 = Entry(master)
-    e6 = Entry(master)
-    e7 = Entry(master)
-    e8 = Entry(master)
-    e9 = Entry(master)
-    e10 = Entry(master)
+    def __init__(self, master):
+        self.master = master
+        self.button = tk.Button(master, text='View List', command= self.view_list).grid(row=10, column=2, sticky=tk.W, pady=4)
+        self.button = tk.Button(master, text='Enter', command=master.quit ).grid(row=10, column=1, sticky=tk.W, pady=4)
+        self.button = tk.Button(master, text='Quit', command=master.quit).grid(row=10, column=0, sticky=tk.W, pady=4)
 
-    e1.grid(row=0, column=1)
-    e2.grid(row=1, column=1)
-    e3.grid(row=2, column=1)
-    e4.grid(row=3, column=1)
-    e5.grid(row=4, column=1)
-    e6.grid(row=5, column=1)
-    e7.grid(row=6, column=1)
-    e8.grid(row=7, column=1)
-    e9.grid(row=8, column=1)
-    e10.grid(row=9, column=1)
+        self.label = tk.Label(master, text="Date").grid(row=0)
+        self.label = tk.Label(master, text="Item").grid(row=1)
+        self.label = tk.Label(master, text="Item Number").grid(row=2)
+        self.label = tk.Label(master, text="Where").grid(row=3)
+        self.label = tk.Label(master, text="Details").grid(row=4)
+        self.label = tk.Label(master, text="Price").grid(row=5)
+        self.label = tk.Label(master, text="Seller").grid(row=6)
+        self.label = tk.Label(master, text="Buyer").grid(row=7)
+        self.label = tk.Label(master, text="Initials").grid(row=8)
+        self.label = tk.Label(master, text="More Info").grid(row=9)
+        self.e1 = tk.Entry(master)
+        self.e2 = tk.Entry(master)
+        self.e3 = tk.Entry(master)
+        self.e4 = tk.Entry(master)
+        self.e5 = tk.Entry(master)
+        self.e6 = tk.Entry(master)
+        self.e7 = tk.Entry(master)
+        self.e8 = tk.Entry(master)
+        self.e9 = tk.Entry(master)
+        self.e10 = tk.Entry(master)
 
-    Button(master, text='Enter', command= lambda: enter_key("Code the command for entering data into database")).grid(row=10, column=1, sticky=W, pady=4)
-    Button(master, text='Quit', command=master.quit).grid(row=10, column=0, sticky=W, pady=4)
+        self.e1 = self.e1.grid(row=0, column=1)
+        self.e2 = self.e2.grid(row=1, column=1)
+        self.e3 = self.e3.grid(row=2, column=1)
+        self.e4 = self.e4.grid(row=3, column=1)
+        self.e5 = self.e5.grid(row=4, column=1)
+        self.e6 = self.e6.grid(row=5, column=1)
+        self.e7 = self.e7.grid(row=6, column=1)
+        self.e8 = self.e8.grid(row=7, column=1)
+        self.e9 = self.e9.grid(row=8, column=1)
+        self.e10 = self.e10.grid(row=9, column=1)
 
-    mainloop()
+    def view_list(self):
+        self.viewList = tk.Toplevel(self.master)
+        self.app = List(self.viewList)
 
+
+class List:
+    def __init__(self, master):
+        # Screen 1
+        self.master = master
+        #self.frame = tk.Frame(self, master)
+        #self.frame.pack()
+        self.button = tk.Button(master, text='Add Item', command=self.add_item).grid(row=10, column=2, sticky=tk.W, pady=4)
+        self.button.pack(side=LEFT, padx=5, pady=5)
+
+        # creates grid
+        height = 20
+        width = 10
+        for i in range(height):  # rows
+            for j in range(width):  # columns
+                b = tk.Entry(master, text='')
+                b.grid(row=i, column=j)
+
+    def add_item(self):
+        self.addItem = tk.Toplevel(self.master)
+        self.app = EnterData(self.addItem)
+
+
+
+def main():
+    root = tk.Tk()
+    app = EnterData(root)
+    root.mainloop()
+
+if __name__ == '__main__':
+    main()
