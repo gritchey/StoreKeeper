@@ -22,7 +22,7 @@ class EnterData:
 
     def __init__(self, master):
         self.master = master
-        self.button = tk.Button(master, text='View List', command= self.view_list).grid(row=10, column=2, sticky=tk.W, pady=4)
+    #   self.button = tk.Button(master, text='View List', command= self.view_list).grid(row=10, column=2, sticky=tk.W, pady=4)
         self.button = tk.Button(master, text='Enter', command=master.quit ).grid(row=10, column=1, sticky=tk.W, pady=4)
         self.button = tk.Button(master, text='Quit', command=master.quit).grid(row=10, column=0, sticky=tk.W, pady=4)
 
@@ -58,25 +58,23 @@ class EnterData:
         self.e9 = self.e9.grid(row=8, column=1)
         self.e10 = self.e10.grid(row=9, column=1)
 
-    def view_list(self):
-        self.viewList = tk.Toplevel(self.master)
-        self.app = List(self.viewList)
+    #def view_list(self):
+    #    self.viewList = tk.Toplevel(self.master)
+    #    self.app = List(self.viewList)
 
 
 class List:
+    # screen 1
     def __init__(self, master):
-        # Screen 1
         self.master = master
-        #self.frame = tk.Frame(self, master)
-        #self.frame.pack()
-        self.button = tk.Button(master, text='Add Item', command=self.add_item).grid(row=10, column=2, sticky=tk.W, pady=4)
-        self.button.pack(side=LEFT, padx=5, pady=5)
 
         # creates grid
         height = 20
         width = 10
         for i in range(height):  # rows
             for j in range(width):  # columns
+                self.button = tk.Button(master, text='Add Item', command=self.add_item).grid(row=20, column=1,
+                                                                                             sticky=tk.W, pady=4)
                 b = tk.Entry(master, text='')
                 b.grid(row=i, column=j)
 
@@ -88,8 +86,9 @@ class List:
 
 def main():
     root = tk.Tk()
-    app = EnterData(root)
+    app = List(root)
     root.mainloop()
+
 
 if __name__ == '__main__':
     main()
