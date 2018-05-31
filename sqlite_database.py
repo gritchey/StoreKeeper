@@ -1,47 +1,45 @@
 import sqlite3
-from main import Item
-
-conn = sqlite3.connect('items.db')
-
-c = conn.cursor()
 
 
-def data_entry():
+class DB:
 
-    c.execute("""CREATE TABLE IF NOT EXISTS items (
-            date text,
-            item_name text,
-            item_number text,
-            details text,
-            price real,
-            seller text,
-            buyer text,
-            location text,
-            initials text,
-            more_info text
-            )""")
+    def __init__(self):
+        self.conn = sqlite3.connect('items.db')
 
-    item_1 = Item(2, 2, 2, 2, 2, 2, 2, 2, 2, 2)
+        self.c = self.conn.cursor()
 
-    c.execute("INSERT INTO items VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (item_1.date, item_1.item_name,
-                                                                          item_1.item_number, item_1.details,
-                                                                          item_1.price, item_1.seller, item_1.buyer,
-                                                                          item_1.location, item_1.initials,
-                                                                          item_1.more_info))
+        self.c.execute("""CREATE TABLE IF NOT EXISTS items (
+                date text,
+                item_name text,
+                item_number text,
+                details text,
+                price real,
+                seller text,
+                buyer text,
+                location text,
+                initials text,
+                more_info text
+                )""")
 
-    conn.commit()
+    def insert(self, item_1):
 
-# print(c.fetchall())    Comment out because prints empty list
+        self.c.execute("INSERT INTO items VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (item_1.date, item_1.item_name,
+                                                                                   item_1.item_number, item_1.details,
+                                                                                   item_1.price, item_1.seller, item_1.buyer,
+                                                                                   item_1.location, item_1.initials,
+                                                                                   item_1.more_info))
 
-
-# returns items from database
-def read_from_db():
-    c.execute('SELECT * FROM items')
-    data = c.fetchall()
-    for row in data:
-        print(row)
+        self.conn.commit()
 
 
-read_from_db()
-c.close()
-conn.close()
+    # returns items from database
+    def read_from_db(self):
+        self.c.execute('SELECT * FROM items')
+        data = self.c.fetchall()
+        for row in data:
+            print(row)
+
+    def close_conn(self):
+        self.read_from_db()
+        self.c.close()
+        self.conn.close()
