@@ -5,7 +5,10 @@ conn = sqlite3.connect('items.db')
 
 c = conn.cursor()
 
-c.execute("""CREATE TABLE IF NOT EXISTS items (
+
+def data_entry():
+
+    c.execute("""CREATE TABLE IF NOT EXISTS items (
             date text,
             item_name text,
             item_number text,
@@ -18,16 +21,27 @@ c.execute("""CREATE TABLE IF NOT EXISTS items (
             more_info text
             )""")
 
-item_1 = Item()
+    item_1 = Item(2, 2, 2, 2, 2, 2, 2, 2, 2, 2)
 
-c.execute("INSERT INTO items VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", (item_1.date, item_1.item_name, item_1.item_number,
-                                                                   item_1.details, item_1.price, item_1.seller,
-                                                                   item_1.buyer, item_1.location, item_1.initials,
-                                                                   item_1.more_info))
+    c.execute("INSERT INTO items VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (item_1.date, item_1.item_name,
+                                                                          item_1.item_number, item_1.details,
+                                                                          item_1.price, item_1.seller, item_1.buyer,
+                                                                          item_1.location, item_1.initials,
+                                                                          item_1.more_info))
+
+    conn.commit()
+
+# print(c.fetchall())    Comment out because prints empty list
 
 
-print(c.fetchall())
+# returns items from database
+def read_from_db():
+    c.execute('SELECT * FROM items')
+    data = c.fetchall()
+    for row in data:
+        print(row)
 
-conn.commit()
+
+read_from_db()
 c.close()
 conn.close()
