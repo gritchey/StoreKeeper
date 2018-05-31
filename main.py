@@ -37,7 +37,7 @@ class EnterData:
         self.label = tk.Label(master, text="More Info").grid(row=9)
         # input box
         self.date = tk.Entry(master)
-        self.item = tk.Entry(master)
+        self.item_name = tk.Entry(master)
         self.item_number = tk.Entry(master)
         self.where = tk.Entry(master)
         self.details = tk.Entry(master)
@@ -48,7 +48,7 @@ class EnterData:
         self.more_info = tk.Entry(master)
         # align input box
         self.date.grid(row=0, column=1)
-        self.item.grid(row=1, column=1)
+        self.item_name.grid(row=1, column=1)
         self.item_number.grid(row=2, column=1)
         self.where.grid(row=3, column=1)
         self.details.grid(row=4, column=1)
@@ -58,10 +58,21 @@ class EnterData:
         self.initials.grid(row=8, column=1)
         self.more_info.grid(row=9, column=1)
 
-    # enter data
     def enter(self):
-        print(self.date.get())
-
+        self.item = Item(self.date.get(),
+                         self.item_name.get(),
+                         self.item_number.get(),
+                         self.where.get(),
+                         self.details.get(),
+                         self.price.get(),
+                         self.seller.get(),
+                         self.buyer.get(),
+                         self.initials.get(),
+                         self.more_info.get()
+                         )
+        sql = db.DB()
+        sql.insert(self.item)
+        sql.close_conn()
 
 
 class List:
