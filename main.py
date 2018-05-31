@@ -1,10 +1,9 @@
 import tkinter as tk
-#from sys import exit
+import sqlite_database as db
 
 
 class Item:
     """Enter store items and details"""
-
     def __init__(self, date, item_name, item_number, location, details, price, seller, buyer, initials, more_info):
         self.date = date
         self.item_name = item_name
@@ -19,13 +18,13 @@ class Item:
 
 
 class EnterData:
-
+    """screen 2"""
     def __init__(self, master):
         self.master = master
-    #   self.button = tk.Button(master, text='View List', command= self.view_list).grid(row=10, column=2, sticky=tk.W, pady=4)
-        self.button = tk.Button(master, text='Enter', command=master.quit ).grid(row=10, column=1, sticky=tk.W, pady=4)
+        # buttons
+        self.button = tk.Button(master, text='Enter', command=self.enter).grid(row=10, column=1, sticky=tk.W, pady=4)
         self.button = tk.Button(master, text='Quit', command=master.quit).grid(row=10, column=0, sticky=tk.W, pady=4)
-
+        # label of input box
         self.label = tk.Label(master, text="Date").grid(row=0)
         self.label = tk.Label(master, text="Item").grid(row=1)
         self.label = tk.Label(master, text="Item Number").grid(row=2)
@@ -36,6 +35,7 @@ class EnterData:
         self.label = tk.Label(master, text="Buyer").grid(row=7)
         self.label = tk.Label(master, text="Initials").grid(row=8)
         self.label = tk.Label(master, text="More Info").grid(row=9)
+        # input box
         self.e1 = tk.Entry(master)
         self.e2 = tk.Entry(master)
         self.e3 = tk.Entry(master)
@@ -46,7 +46,7 @@ class EnterData:
         self.e8 = tk.Entry(master)
         self.e9 = tk.Entry(master)
         self.e10 = tk.Entry(master)
-
+        # align input box
         self.e1 = self.e1.grid(row=0, column=1)
         self.e2 = self.e2.grid(row=1, column=1)
         self.e3 = self.e3.grid(row=2, column=1)
@@ -58,13 +58,16 @@ class EnterData:
         self.e9 = self.e9.grid(row=8, column=1)
         self.e10 = self.e10.grid(row=9, column=1)
 
-    #def view_list(self):
-    #    self.viewList = tk.Toplevel(self.master)
-    #    self.app = List(self.viewList)
+    # enter data
+    def enter(self):
+        self.e1text = tk.StringVar()
+        self.e1 = tk.Entry(self.master, textvariable=self.e1text)
+        print(self.e1text.get())
+
 
 
 class List:
-    # screen 1
+    """screen 1"""
     def __init__(self, master):
         self.master = master
 
@@ -81,7 +84,6 @@ class List:
     def add_item(self):
         self.addItem = tk.Toplevel(self.master)
         self.app = EnterData(self.addItem)
-
 
 
 def main():
