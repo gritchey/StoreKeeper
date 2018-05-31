@@ -23,7 +23,7 @@ class EnterData:
         self.master = master
         # buttons
         self.button = tk.Button(master, text='Enter', command=self.enter).grid(row=10, column=1, sticky=tk.W, pady=4)
-        self.button = tk.Button(master, text='Quit', command=master.quit).grid(row=10, column=0, sticky=tk.W, pady=4)
+        self.button = tk.Button(master, text='Quit', command=master.destroy).grid(row=10, column=0, sticky=tk.W, pady=4)
         # label of input box
         self.label = tk.Label(master, text="Date").grid(row=0)
         self.label = tk.Label(master, text="Item").grid(row=1)
@@ -36,33 +36,31 @@ class EnterData:
         self.label = tk.Label(master, text="Initials").grid(row=8)
         self.label = tk.Label(master, text="More Info").grid(row=9)
         # input box
-        self.e1 = tk.Entry(master)
-        self.e2 = tk.Entry(master)
-        self.e3 = tk.Entry(master)
-        self.e4 = tk.Entry(master)
-        self.e5 = tk.Entry(master)
-        self.e6 = tk.Entry(master)
-        self.e7 = tk.Entry(master)
-        self.e8 = tk.Entry(master)
-        self.e9 = tk.Entry(master)
-        self.e10 = tk.Entry(master)
+        self.date = tk.Entry(master)
+        self.item = tk.Entry(master)
+        self.item_number = tk.Entry(master)
+        self.where = tk.Entry(master)
+        self.details = tk.Entry(master)
+        self.price = tk.Entry(master)
+        self.seller = tk.Entry(master)
+        self.buyer = tk.Entry(master)
+        self.initials = tk.Entry(master)
+        self.more_info = tk.Entry(master)
         # align input box
-        self.e1 = self.e1.grid(row=0, column=1)
-        self.e2 = self.e2.grid(row=1, column=1)
-        self.e3 = self.e3.grid(row=2, column=1)
-        self.e4 = self.e4.grid(row=3, column=1)
-        self.e5 = self.e5.grid(row=4, column=1)
-        self.e6 = self.e6.grid(row=5, column=1)
-        self.e7 = self.e7.grid(row=6, column=1)
-        self.e8 = self.e8.grid(row=7, column=1)
-        self.e9 = self.e9.grid(row=8, column=1)
-        self.e10 = self.e10.grid(row=9, column=1)
+        self.date.grid(row=0, column=1)
+        self.item.grid(row=1, column=1)
+        self.item_number.grid(row=2, column=1)
+        self.where.grid(row=3, column=1)
+        self.details.grid(row=4, column=1)
+        self.price.grid(row=5, column=1)
+        self.seller.grid(row=6, column=1)
+        self.buyer.grid(row=7, column=1)
+        self.initials.grid(row=8, column=1)
+        self.more_info.grid(row=9, column=1)
 
     # enter data
     def enter(self):
-        self.e1text = tk.StringVar()
-        self.e1 = tk.Entry(self.master, textvariable=self.e1text)
-        print(self.e1text.get())
+        print(self.date.get())
 
 
 
