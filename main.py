@@ -22,19 +22,19 @@ class EnterData:
     def __init__(self, master):
         self.master = master
         # buttons
-        self.button = tk.Button(master, text='Enter', command=self.enter).grid(row=10, column=1, sticky=tk.W, pady=4)
-        self.button = tk.Button(master, text='Quit', command=master.destroy).grid(row=10, column=0, sticky=tk.W, pady=4)
+        tk.Button(master, text='Enter', command=self.enter).grid(row=10, column=1, sticky=tk.W, pady=4)
+        tk.Button(master, text='Quit', command=master.destroy).grid(row=10, column=0, sticky=tk.W, pady=4)
         # label of input box
-        self.label = tk.Label(master, text="Date").grid(row=0)
-        self.label = tk.Label(master, text="Item").grid(row=1)
-        self.label = tk.Label(master, text="Item Number").grid(row=2)
-        self.label = tk.Label(master, text="Where").grid(row=3)
-        self.label = tk.Label(master, text="Details").grid(row=4)
-        self.label = tk.Label(master, text="Price").grid(row=5)
-        self.label = tk.Label(master, text="Seller").grid(row=6)
-        self.label = tk.Label(master, text="Buyer").grid(row=7)
-        self.label = tk.Label(master, text="Initials").grid(row=8)
-        self.label = tk.Label(master, text="More Info").grid(row=9)
+        tk.Label(master, text="Date").grid(row=0)
+        tk.Label(master, text="Item").grid(row=1)
+        tk.Label(master, text="Item Number").grid(row=2)
+        tk.Label(master, text="Where").grid(row=3)
+        tk.Label(master, text="Details").grid(row=4)
+        tk.Label(master, text="Price").grid(row=5)
+        tk.Label(master, text="Seller").grid(row=6)
+        tk.Label(master, text="Buyer").grid(row=7)
+        tk.Label(master, text="Initials").grid(row=8)
+        tk.Label(master, text="More Info").grid(row=9)
         # input box
         self.date = tk.Entry(master)
         self.item_name = tk.Entry(master)
@@ -85,14 +85,30 @@ class List:
         width = 10
         for i in range(height):  # rows
             for j in range(width):  # columns
-                self.button = tk.Button(master, text='Add Item', command=self.add_item).grid(row=20, column=1,
-                                                                                             sticky=tk.W, pady=4)
                 b = tk.Entry(master, text='')
                 b.grid(row=i, column=j)
+                tk.Button(master, text='Add Item', command=self.add_item).grid(row=20, column=1,
+                                                                                             sticky=tk.W, pady=4)
+                tk.Button(master, text='   Edit   ', command=self.edit_item).grid(row=20, column=0,
+                                                                                                sticky=tk.E, pady=4)
+                tk.Label(master, text="Date", padx=60).grid(row=0, column=0, pady=4)
+                tk.Label(master, text="Item", padx=60).grid(row=0, column=1, pady=4)        # might have to do 'self.date_label = tk.label(...)'
+                tk.Label(master, text="Item Number", padx=35).grid(row=0, column=2, pady=4) # self.date_label.grid(...)
+                tk.Label(master, text="Where", padx=60).grid(row=0, column=3, pady=4)       # to reference specific grid when
+                tk.Label(master, text="Details", padx=60).grid(row=0, column=4, pady=4)     # fetching data from it
+                tk.Label(master, text="Price", padx=60).grid(row=0, column=5, pady=4)
+                tk.Label(master, text="Seller", padx=60).grid(row=0, column=6, pady=4)
+                tk.Label(master, text="Buyer", padx=60).grid(row=0, column=7, pady=4)
+                tk.Label(master, text="Initials", padx=60).grid(row=0, column=8, pady=4)
+                tk.Label(master, text="More Info", padx=50).grid(row=0, column=9, pady=4)
 
     def add_item(self):
         self.addItem = tk.Toplevel(self.master)
         self.app = EnterData(self.addItem)
+
+    def edit_item(self):
+        self.editItem = tk.Toplevel(self.master)
+        self.app = EnterData(self.editItem)
 
 
 def main():
